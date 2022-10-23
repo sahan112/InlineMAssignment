@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  name: NewPool
+  name: Default
 
 variables:
   buildConfiguration: 'Release'
