@@ -72,6 +72,7 @@ stages:
                       templateLocation: 'Linked artifact'
                       csmFile: '$(Pipeline.Workspace)/_DeployInfrastructure/drop/template.json'
                       csmParametersFile: '$(Pipeline.Workspace)/_DeployInfrastructure/drop/parameters.json'
+                      overrideParameters: -webAppName InlineM-Staging -appServicePlan InlineMStaging
                       deploymentMode: 'Incremental'
 
 - stage: "Production"
