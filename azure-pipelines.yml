@@ -6,7 +6,7 @@ stages:
   jobs:
   - job: "BuildApp"
     pool:
-      vmImage: ubuntu-latest
+      name: Default
 
     variables:
       buildConfiguration: 'Release'
