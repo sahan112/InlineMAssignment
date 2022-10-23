@@ -41,7 +41,7 @@ stages:
   jobs:
   - job:
     pool:
-      vmImage: ubuntu-latest
+      name: Default
     steps:
 #      - download: current
 #        artifact: drop
