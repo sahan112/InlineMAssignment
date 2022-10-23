@@ -36,30 +36,29 @@ stages:
         artifact: 'drop'
         publishLocation: 'pipeline'
 
-# - stage: "DeployStaging"
-#   dependsOn: "Build"
-  # jobs:
-  # - job:
-  #   pool:
-  #     vmImage: ubuntu-latest
-  #   steps:
+- stage: "DeployStaging"
+  dependsOn: "Build"
+  jobs:
+  - job:
+    pool:
+      vmImage: ubuntu-latest
+    steps:
 #      - download: current
 #        artifact: drop
-
-      # - task: DownloadBuildArtifacts@1
-      #   inputs:
-      #     buildType: 'current'
-      #     downloadType: 'single'
-      #     artifactName: 'drop'
-      #     downloadPath: '$(System.DefaultWorkingDirectory)'
+      - task: DownloadBuildArtifacts@1
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'drop'
+          downloadPath: '$(System.DefaultWorkingDirectory)'
            
-      # - task: AzureRmWebAppDeployment@4
-      #   inputs:
-      #     ConnectionType: 'AzureRM'
-      #     azureSubscription: 'Inline-Assignment-Subscription'
-      #     appType: 'webApp'
-      #     WebAppName: 'Inline-Staging'
-      #     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'Inline-Assignment-Subscription'
+          appType: 'webApp'
+          WebAppName: 'Inline-Staging'
+          packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 # - stage: "DeployProduction"
 #   dependsOn: "DeployStaging"
