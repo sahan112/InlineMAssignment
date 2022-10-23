@@ -36,4 +36,26 @@ stages:
      runOnce:
        deploy:
         steps:
-          - 
+           - task: DownloadBuildArtifacts@1
+             inputs:
+               buildType: 'current'
+               downloadType: 'single'
+               artifactName: 'drop'
+               downloadPath: '$(System.DefaultWorkingDirectory)'
+          #  - task: replacetokens@5
+          #    inputs:
+          #      rootDirectory: '$(System.DefaultWorkingDirectory)'
+          #      targetFiles: 'parameters.json'
+          #      encoding: 'auto'
+          #      tokenPattern: 'custom'
+          #      tokenPrefix: '#'
+          #      tokenSuffix: '#'
+          #      writeBOM: true
+          #      actionOnMissing: 'warn'
+          #      keepToken: false
+          #      actionOnNoFiles: 'continue'
+          #      enableTransforms: false
+          #      enableRecursion: false
+          #      useLegacyPattern: false
+          #      enableTelemetry: true
+          
