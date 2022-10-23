@@ -60,27 +60,27 @@ stages:
           WebAppName: 'InlineM-Staging'
           packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
-# - stage: "DeployProduction"
-#   dependsOn: "DeployStaging"
-#   jobs:
-#   - job:
-#     pool:
-#       vmImage: ubuntu-latest
-#     steps:
+- stage: "DeployProduction"
+  dependsOn: "DeployStaging"
+  jobs:
+  - job:
+    pool:
+      name: Default
+    steps:
 #        - download: current
 #          artifact: drop
 
-      # - task: DownloadBuildArtifacts@1
-      #   inputs:
-      #     buildType: 'current'
-      #     downloadType: 'single'
-      #     artifactName: 'drop'
-      #     downloadPath: '$(System.DefaultWorkingDirectory)'
+      - task: DownloadBuildArtifacts@1
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'drop'
+          downloadPath: '$(System.DefaultWorkingDirectory)'
   
-      # - task: AzureRmWebAppDeployment@4
-      #   inputs:
-      #     ConnectionType: 'AzureRM'
-      #     azureSubscription: 'Inline-Assignment-Subscription'
-      #     appType: 'webApp'
-      #     WebAppName: 'Inline-Production'
-      #     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'InlineServiceConnection'
+          appType: 'webApp'
+          WebAppName: 'InlineM-Production'
+          packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
