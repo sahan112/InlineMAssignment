@@ -4,12 +4,14 @@
   "parameters": {
     "appServicePlanName": {
       "type": "string",
+      "defaultValue": "appServicePlan1",
       "metadata": {
         "description": "App service Plan Name"
       }
     },
     "webAppName": {
       "type": "string",
+      "defaultValue": "webApp1",
       "metadata": {
         "description": "Web App Name"
       }
