@@ -3,10 +3,10 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "appServicePlanName": {
-      "value": "#arm_appServicePlan#"
+      "value": "#appServicePlan#"
     },
     "webAppName": {
-      "value": "#arm_webApp#"
+      "value": "#webApp#"
     }
   }
 }
