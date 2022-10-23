@@ -6,7 +6,7 @@
       "value": "#appServicePlan#"
     },
     "webAppName": {
-      "value": "#appServicePlan#"
+      "value": "#webApp#"
     }
   }
 }
