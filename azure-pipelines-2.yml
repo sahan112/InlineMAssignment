@@ -43,10 +43,10 @@ stages:
                buildType: 'current'
                downloadType: 'single'
                artifactName: 'drop'
-               downloadPath: '$(System.DefaultWorkingDirectory)'
+               downloadPath: '$(Pipeline.Workspace)'
            - task: replacetokens@5
              inputs:
-               rootDirectory: '$(System.DefaultWorkingDirectory)/drop'
+               rootDirectory: '$(Pipeline.Workspace)/drop'
                targetFiles: 'parameters.json'
                encoding: 'auto'
                tokenPattern: 'custom'
@@ -70,8 +70,8 @@ stages:
                       resourceGroupName: 'Inline-inf-rg'
                       location: 'East US'
                       templateLocation: 'Linked artifact'
-                      csmFile: '$(System.DefaultWorkingDirectory)/_DeployInfrastructure/drop/template.json'
-                      csmParametersFile: '$(System.DefaultWorkingDirectory)/_DeployInfrastructure/drop/parameters.json'
+                      csmFile: '$(Pipeline.Workspace)/_DeployInfrastructure/drop/template.json'
+                      csmParametersFile: '$(Pipeline.Workspace)/_DeployInfrastructure/drop/parameters.json'
                       deploymentMode: 'Incremental'
 
 - stage: "Production"
