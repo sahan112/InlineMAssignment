@@ -28,7 +28,7 @@ stages:
 - stage: "Staging"
   dependsOn: "BuildStage"
   variables:
-       - group: 'Staging-Variable'
+       - group: 'Staging-Variables'
   jobs:
   - deployment:
     pool:
