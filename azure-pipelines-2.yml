@@ -46,7 +46,56 @@ stages:
                downloadPath: '$(System.DefaultWorkingDirectory)'
            - task: replacetokens@5
              inputs:
-               rootDirectory: '$(System.DefaultWorkingDirectory)'
+               rootDirectory: '$(System.DefaultWorkingDirectory)/drop'
+               targetFiles: 'parameters.json'
+               encoding: 'auto'
+               tokenPattern: 'custom'
+               tokenPrefix: '#'
+               tokenSuffix: '#'
+               writeBOM: true
+               actionOnMissing: 'warn'
+               keepToken: false
+               actionOnNoFiles: 'continue'
+               enableTransforms: false
+               enableRecursion: false
+               useLegacyPattern: false
+               enableTelemetry: true
+
+           - task: AzureResourceManagerTemplateDeployment@3
+             inputs:
+                      deploymentScope: 'Resource Group'
+                      azureResourceManagerConnection: 'InlineServiceConnection'
+                      subscriptionId: '4c2b0b3e-9164-4cd5-b1c7-559bb3ddf30a'
+                      action: 'Create Or Update Resource Group'
+                      resourceGroupName: 'Inline-inf-rg'
+                      location: 'East US'
+                      templateLocation: 'Linked artifact'
+                      csmFile: '$(System.DefaultWorkingDirectory)/_DeployInfrastructure/drop/template.json'
+                      csmParametersFile: '$(System.DefaultWorkingDirectory)/_DeployInfrastructure/drop/parameters.json'
+                      deploymentMode: 'Incremental'
+
+- stage: "Production"
+  dependsOn: "Staging"
+  variables:
+       - group: 'Production-Variables'
+  jobs:
+  - deployment:
+    pool:
+      name: 'Default' 
+    environment: 'Production'
+    strategy:
+     runOnce:
+       deploy:
+        steps:
+           - task: DownloadBuildArtifacts@1
+             inputs:
+               buildType: 'current'
+               downloadType: 'single'
+               artifactName: 'drop'
+               downloadPath: '$(System.DefaultWorkingDirectory)'
+           - task: replacetokens@5
+             inputs:
+               rootDirectory: '$(System.DefaultWorkingDirectory)/drop'
                targetFiles: 'parameters.json'
                encoding: 'auto'
                tokenPattern: 'custom'
