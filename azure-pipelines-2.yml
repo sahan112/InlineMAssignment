@@ -70,9 +70,9 @@ stages:
                       resourceGroupName: 'Inline-inf-rg'
                       location: 'East US'
                       templateLocation: 'Linked artifact'
-                      csmFile: '$(Pipeline.Workspace)/_DeployInfrastructure/drop/template.json'
-                      csmParametersFile: '$(Pipeline.Workspace)/_DeployInfrastructure/drop/parameters.json'
-                      overrideParameters: -webAppName InlineM-Staging -appServicePlan InlineMStaging
+                      csmFile: '$(Pipeline.Workspace)/drop/template.json'
+                      csmParametersFile: '$(Pipeline.Workspace)/drop/parameters.json'
+                      # overrideParameters: -webAppName InlineM-Staging -appServicePlan InlineMStaging
                       deploymentMode: 'Incremental'
 
 - stage: "Production"
