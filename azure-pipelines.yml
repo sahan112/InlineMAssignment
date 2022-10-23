@@ -55,9 +55,9 @@ stages:
       - task: AzureRmWebAppDeployment@4
         inputs:
           ConnectionType: 'AzureRM'
-          azureSubscription: 'Inline-Assignment-Subscription'
+          azureSubscription: 'InlineServiceConnection'
           appType: 'webApp'
-          WebAppName: 'Inline-Staging'
+          WebAppName: 'InlineM-Staging'
           packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 # - stage: "DeployProduction"
